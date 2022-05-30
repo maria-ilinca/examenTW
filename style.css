@@ -1,0 +1,375 @@
+/* CHEATSHEET CSS
+- SELECTORI */
+
+head  selecteaza elem cu tag ul head 
+
+.red selecteaza toate elem din clasa  ‘red’ 
+
+#nav selecteaza toate elem cu id-ul  ‘nav’ 
+
+div.row  selecteaza elem cu tag ul div care au clasa  ‘row’ 
+
+[aria-hidden="true"] selecteaza elementele cu atributul aria-hidden care are val  “true”
+
+li a  toate a urile care sunt copii lui li
+
+div.row * toate elementele copii ale lui div si clasa row
+
+li > a selecteaza descendentii directi, nu pe toti
+
+li + a primul element a care il succede pe li
+
+li, a toate elem a si li
+
+li ~ a selecteaza un element a urmat de li
+
+
+:first-child primul copil, :last-child ultimul copil
+
+:nth-child() 
+
+a:not(.name) toate elem a care nu sunt in clasa name
+
+::after 
+
+::before 
+
+:hover selecteaza un element pe care am pus cursul
+
+:focus selecteaza element cand avem cursorul pe el si apasam 
+
+:active selecteaza un elem pe care am facut click
+
+:link selecteaza link uri care nu sunt vizitate
+
+:visited  un link deja accesatb
+
+ nth-child este o pseudo-clasa care are un pattern prin care se potriveste unuia sau mai multor elemente in raport cu pozitia lor
+
+  a:nth-child(pattern) {
+    /* Css goes here */
+  }
+
+  a:nth-child(odd) {} si a:nth-child(even) {}
+
+putem folosi si ecuatii de forma an+b intre paranteze
+
+  a:nth-childe(3n) {
+    /* CSS goes here */
+  }
+
+
+/* -POSITIONS */
+/* position: relative; 
+position: absolute; de folosit pentru un element copil in interiorul parintelui
+position: static; 
+position: fixed;
+position: sticky; - combinatie intre relative si fixed, depinde de param dati la top, bottom, left si right*/
+
+
+/*paragrafele care nu au title => primesc background  */ 
+
+p:not[title]  
+{  
+background-color: green;  
+}  
+
+/* taierea cu o linie */
+p.x {
+    text-decoration: line-through;
+}
+
+
+/*  subliniaza elem de tip b de pe poz impare pentru 2 clase c1 si c2  */ 
+.c1 > b:nth-child(odd), .c2 > b:nth-child(odd) {  
+text-decoration: underline; 
+}  
+
+/* la inc tuturor paragr de sub ultimul div punem dimensiune de 2.5 ori mai mare decat dimens textului  */ 
+div:last-of-type ~ p:before  
+{  
+    content: "final";  
+    color: red;  
+    font-size: 2.5em; 
+}  
+
+ /* cand punem cursorul pe un elem => toate elem din casa: border punctat 2px  */ 
+div *:hover 
+
+{ 
+    border-color: green;  
+    border-style: dotted;  
+    border-width: 2px; 
+} 
+
+#container{
+    display: grid;
+	grid-template-rows: auto auto auto;
+	border:1px solid lightgray;
+	width:70%;
+	padding:5px;
+	height:400px;
+}
+#container div{
+	border:1px solid black;
+	box-sizing:border-box;
+	/* defineste modul in care sunt calculate latimea si inaltimea unui element:
+	 daca ar trebui sa includa padding, margin border */
+	padding:0px;
+}
+
+/* cand punem grid-column a:b ; a e coloana de unde incepe elementul si b col la care se extinde;
+daca aveam a: span b, at elem se intindea pe b coloane */
+
+#d1
+{
+	grid-column: 1/4;
+}
+
+#d2
+{
+	grid-column: 1/3;
+}
+
+#d3
+{
+	grid-column: 1/2;
+}
+
+#d4
+{
+	grid-column: 3/4;
+}
+
+/* cand mics pagina a.i latimeaa este > 300px si mai mica de 600px, divurile 2,3 si 4 sunt ascunse, iar d1 se intinde pe toata latimea si inaltimea cont */
+@media screen and (min-width:300px) and (max-width:600px)
+{
+   #d2, #d3,#d4
+   {
+       display:none;
+   }
+  /* avem un singur div dispus pe linie- grid-template-...: auto genereaza automat dimens in fctie de elem */
+   #container{
+    grid-template-rows: auto; 
+   }
+}
+
+/* pozitiile unor divuri  */
+#div1{
+	top:150px;
+	left:440px;
+	height:100px;
+}
+
+#div2{
+	top:230px;
+	left:5px;
+	height:40px;
+}
+
+#div3{
+	top:140px;
+	left:305px;
+	height:50px;
+}
+
+/* Paragrafele care se afla in interiorul unei liste sa fie scrise cu culoare verde */
+li p
+{
+	color:green;
+}
+
+/* Toate elementele de dupa paragraful cu id-ul "xyz" din pagina, atat frati cat si elementele din subarborii fratilor care au clasa "ceva" sa aiba font-size-ul dublu fata de container (folositi unitati relative)  */
+p#xyz~.ceva, p#xyz~* .ceva
+{
+	font-size:2em;
+}
+
+/* la finalul fiecarui paragraf sa se genereze un patratel de dimensiune 10*10px, de culoare albastra. Proprietatea content va fi setata la sirul vid */
+p:after
+{
+	display:inline-block;
+	width:10px;
+	height:10px;
+	content:"";
+	background:blue;
+}
+
+/* cand se vine cu cursorul pe un li dintr-o sublista. 
+Daca li-ul e pe o pozitie para, isi schimba culoarea de background treptat pe parcursul a 2 secunde de la transparent
+ la rosu (si invers, cand se ia cursorul de pe li) ) */
+
+li:nth-of-type(even)
+{
+	transition:background 2s linear;
+}
+
+li:nth-of-type(even):hover
+{
+	background:red;
+}
+/* aura rosie */
+.zzz{
+	box-shadow: 0px 0px 10px red;
+}
+
+/* Creati un div cu clasa "container" (scrieti o regula css pentru aceasta clasa, astfel incat inaltimea sa fie jumatate din inaltimea ecranului, latimea de 250px si border albastru punctat) in care se vor gasi alte 5 divuri.
+Realizati folosind tehnica grid din CSS urmatorul mod de afisare al divurilor. Scrieti o regula css astfel incat divurile din interiorul unui element cu clasa "container" sa aiba border negru, dublu, de 8px si dimensiunea fontului de 15px.
+layout*/
+
+.container{
+	width:250px;
+	height:50vh;
+	border:2px dotted blue;
+	display:grid;
+	grid-template-columns: auto auto auto;
+	/*ma sigur ca am creat 3 col cu dimensiuni egale*/
+   }
+  
+  .container > div{
+	border:8px double black;
+	font-size:15px;
+  }
+  
+  div:nth-child(1){
+	grid-column:1/2;
+	grid-row:2/3;
+	/* elementul ocupa prima coloana din a doua linie */
+  }
+  
+  div:nth-child(5){
+	grid-column:3/4;
+	grid-row:1/4;
+  }
+  
+  div:nth-child(2), div:nth-child(3), div:nth-child(4){
+	grid-column:2/3;
+  }
+
+
+ /* Scrieti un media query pentru latimea ferestrei sub 600px si inaltimea sub 500 px cu efectele:
+divurile sa nu se mai afiseze in grid, ci in formatul default, unul sub altul, intinse pe toata latimea containerului
+cand aducem cursorul pe oricare din ele sa creasca treptat dimensiunea fontului (timp de 3 secunde) la 30px. */
+
+  @media screen and (max-width:600px) and (max-height:500px){
+  
+  .container{
+	display:block;
+  }
+  
+  .container > div {
+	transition: font-size 3s;
+  }
+  
+  .container > div:hover {
+	 font-size:30px; }
+  }
+ 
+/* clasa pt js 330 */
+.dreptunghi{
+	width:100px;
+	height:150px;
+	border:1px solid red;
+	display:inline-block;
+	margin-left:10px;
+}
+  
+
+/*ANIMATII SI TRANZITII*/
+/* -animatii */
+@keyframes nume_animatie {
+	/* schimba de la o culoare la alta */
+	from {background-color: red;}
+	to {background-color: yellow;}
+	
+	/* in functie de fractiunea de timp, se aplica o propr */
+	0%   {background-color: red;}
+	25%  {background-color: yellow;}
+	50%  {background-color: blue;}
+	100% {background-color: green;}
+  }
+  
+  /* elementul caruia ii aplicam animatia*/
+  div {
+	/* ceva propr ale elem */
+	animation-name: nume_animatie;
+	animation-duration: durata_animatie (secunde);
+	/* putem avea si delay: x s; daca x e pozitiv atunci se intarzie cu x s, daca x e neg animatia s a desf deja de s secunde  */
+	animation-delay: x s;
+	/* animation-iteration-count - de cate ori ruleaza */
+	/* animation-direction - normal, reverse, alternate si alternate-reverse */
+    animation-timing-function: linear; /*e la fel pe toata durata */
+    animation-timing-function: ease; /* slow start, then fast, then end slowly */
+    animation-timing-function: ease-in; /*inc lent*/
+    animation-timing-function: ease-out; /*sf lent*/
+    animation-timing-function: ease-in-out; /*inc si sf lent*/
+  }
+
+/* -Tranzitii */
+
+/* transition: pe ce aplicam ( width), durata (s) */
+/* transition-delay 
+transition-duration
+transition-property 
+transition-timing-function - ca la animatii */
+
+
+/* AFTER SI BEFORE */
+/* - folos pentru a insera continut dupa sau inaintea unui element
+before: */
+p::before {
+	content: "punem continut";
+	background-color: cul1;
+    color: cul2;
+  font-weight:bold ;
+   /* sau orice alta declarare in css */
+}
+/* after */
+p::after {
+	/*  declarari css */
+}
+
+/* Z-INDEX */
+/* - specifica pozitia unor elemente la afisare , de ex z-index:-1 => elem e pozitionat e in spate
+- ca sa folosim z-index dam inainte elem o pozitie(absolute, relative,fixed, sticky) sau merge pt elem din flex (care sunt copii directi ai display:flex elements). */
+
+
+#parinte{
+	position: absolute;
+	display: flex;
+	width: 75%;
+	height: 50%;
+	border: 3px solid black;
+  }
+/* copii dispusi pe 4 coloane, cu latimea 1/4 din latimea parintelui; cand aducem cursorul pe el sa isi schimbe backgroundul in 2s in cul rosu */
+#copil{
+	height: 50%;
+	width: 25%;
+	border: 2px dotted green;
+	transition: 2s;
+  }
+
+  #copil:nth-child(odd){
+	background-color: yellow;
+  }
+  #copil:nth-child(even){
+	background-color: orange;
+  }
+  #copil:hover{
+	background-color: red;
+  }
+  @media screen and (min-width: 400px) and (max-width:700px) {
+	#parinte{
+	  display: grid;
+	  grid-template-columns: 50% 50%;
+
+	}
+  
+	#copil{
+	  width: 100%;
+	  height: 100%;
+	  overflow: hidden;
+	  border: none;
+	}
+
+}
